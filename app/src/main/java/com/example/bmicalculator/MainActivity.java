@@ -1,3 +1,6 @@
+
+
+
 package com.example.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,53 +34,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnReset = findViewById(R.id.btnReset);
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetFields();
-            }
-        });
     }
 
     private void calculateBMI() {
-        try {
-            double weight = Double.parseDouble(Weight.getText().toString());
-            double height = Double.parseDouble(Height.getText().toString());
-            double height_in_meter=height/100;
-            double bmi = weight / (height_in_meter * height_in_meter);
+        double weight = Double.parseDouble(Weight.getText().toString());
+        double height = Double.parseDouble(Height.getText().toString());
+        double bmi = weight / (height * height);
 
-            //Categories Added
-            String category = "";
-
-            if (bmi < 18.5) {
-                category = "Underweight";
-            } else if (bmi >= 18.5 && bmi < 25) {
-                category = "Normal";
-            } else if (bmi >= 25 && bmi < 30) {
-                category = "Overweight";
-            } else {
-                category = "Obesity";
-            }
-
-            Result.setText("BMI: " + bmi + "\nCategory: " + category);
-            TextView errorTextView = findViewById(R.id.Error);
-            errorTextView.setVisibility(View.GONE);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            TextView errorTextView = findViewById(R.id.Error);
-            errorTextView.setVisibility(View.VISIBLE);
-            errorTextView.setText("Error: Invalid input. Please enter a number.");
-        }
+        Result.setText("BMI: " + bmi);
     }
 
-
-
-    private void resetFields() {
-        Weight.setText("");
-        Height.setText("");
-        Result.setText("");
-        TextView errorTextView = findViewById(R.id.Error);
-        errorTextView.setVisibility(View.GONE);
-    }
 }
