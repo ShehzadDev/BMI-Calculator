@@ -1,6 +1,3 @@
-
-
-
 package com.example.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnReset = findViewById(R.id.btnReset);
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetFields();
+            }
+        });
     }
 
     private void calculateBMI() {
@@ -44,4 +48,9 @@ public class MainActivity extends AppCompatActivity {
         Result.setText("BMI: " + bmi);
     }
 
+    private void resetFields() {
+        Weight.setText("");
+        Height.setText("");
+        Result.setText("");
+    }
 }
