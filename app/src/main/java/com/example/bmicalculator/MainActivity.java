@@ -41,16 +41,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calculateBMI() {
-        double weight = Double.parseDouble(Weight.getText().toString());
-        double height = Double.parseDouble(Height.getText().toString());
-        double bmi = weight / (height * height);
 
-        Result.setText("BMI: " + bmi);
+        //Exception Handled
+        try {
+            double weight = Double.parseDouble(Weight.getText().toString());
+            double height = Double.parseDouble(Height.getText().toString());
+            double bmi = weight / (height * height);
+
+            Result.setText("BMI: " + bmi);
+
+            //Hide Error
+            TextView errorTextView = findViewById(R.id.Error);
+            errorTextView.setVisibility(View.GONE);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+
+            TextView errorTextView = findViewById(R.id.Error);
+            errorTextView.setVisibility(View.VISIBLE);
+            errorTextView.setText("Error: Invalid input. Please enter a number.");
+        }
+
     }
+
 
     private void resetFields() {
         Weight.setText("");
         Height.setText("");
         Result.setText("");
+        TextView errorTextView = findViewById(R.id.Error);
+        errorTextView.setVisibility(View.GONE);
     }
 }
+
